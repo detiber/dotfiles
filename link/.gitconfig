@@ -3,8 +3,8 @@
   email = detiber@gmail.com
   signingkey = CBD7D7A4B41437BC
 
-[url "git@github.com:"]
-  insteadOf = https://github.com/
+#[url "git@github.com:"]
+#  insteadOf = https://github.com/
 
 [commit]
   gpgsign = true

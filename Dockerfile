@@ -10,7 +10,9 @@ RUN dnf -y update && \
         curl \
         man \
         net-tools \
-        iputils && \
+        iputils \
+        neovim \
+        docker-vim && \
     dnf clean all
 
 # Add user

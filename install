@@ -14,20 +14,27 @@ dotfile_base=~/src/dotfiles
 
 # Based on https://github.com/cowboy/dotfiles/blob/master/bin/dotfiles
 function do_stuff() {
+  local action=$1
+  local target_base=$2
+  local files=($3/*)
   local base dest skip
-  local files=($2/*)
+
+  # Create $target_base if needed
+  [ -d "$target_base" ] || mkdir -p "${target_base}"
+
   # No files? abort.
   if (( ${#files[@]} == 0 )); then return; fi
+
   # Run _header function only if declared.
-  [[ $(declare -f "$1_header") ]] && "$1_header"
+  [[ $(declare -f "${action}_header") ]] && "${action}_header"
   # Iterate over files.
   for file in "${files[@]}"; do
     base="$(basename $file)"
-    dest="$HOME/$base"
+    dest="$target_base/$base"
     # Run _test function only if declared.
-    if [[ $(declare -f "$1_test") ]]; then
+    if [[ $(declare -f "${action}_test") ]]; then
       # If _test function returns a string, skip file and print that message.
-      skip="$("$1_test" "$file" "$dest")"
+      skip="$("${action}_test" "$file" "$dest")"
       if [[ "$skip" ]]; then
         e_error "Skipping ~/$base, $skip."
         continue
@@ -44,7 +51,7 @@ function do_stuff() {
       fi
     fi
     # Do stuff.
-    "$1_do" "$base" "$file"
+    "${action}_do" "$base" "$file"
   done
 }
 
@@ -58,14 +65,29 @@ function link_do() {
   ln -sf ${2#$HOME/} ~/
 }
 
+# Link .config files
+function clink_header() { e_header "Linking files into ~.config directory"; }
+function clink_test() {
+  link_test "$1" "$2"
+}
+function clink_do() {
+  e_success "Linking ~/.config/$1."
+  ln -sf ${2/$HOME/..} ~/.config/
+}
+
 # Tweak file globbing.
 shopt -s dotglob
 shopt -s nullglob
 
 platform=$(echo $(uname -s) | tr '[:upper:]' '[:lower:]')
 
-do_stuff "link" "$dotfile_base/link"
-[ -d "$dotfile_base/$platform/link" ] && do_stuff "link" "$dotfile_base/$platform/link"
+do_stuff "link" "${HOME}" "${dotfile_base}/link"
+[ -d "$dotfile_base/$platform/link" ] && do_stuff "link" "${HOME}" "$dotfile_base/$platform/link"
+
+do_stuff "clink" "${HOME}/.config" "${dotfile_base}/clink"
+[ -d "$dotfile_base/$platform/clink" ] && do_stuff "clink" "${HOME}/.config" "$dotfile_base/$platform/clink"
+
+#nvim +PlugInstall! +qall
 
 # Alert if backups were made.
 if [[ "$backup" ]]; then
