@@ -67,7 +67,7 @@ if [[ -n "$TERM" && $(tput colors) -ge 8 ]]; then
 
   # If PID 1 isn't `init` or `systemd` there is a good chance we are
   # containerized.
-  if [[ -d /proc ]] && (grep -qvE '(init|systemd)' /proc/1/cmdline) ; then
+  if [[ -d /proc ]] && (grep -aqvE '(init|systemd)' /proc/1/cmdline) ; then
     ps_cloud="📦"
   fi
 
