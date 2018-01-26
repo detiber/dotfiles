@@ -12,6 +12,7 @@ RUN dnf -y update && \
         net-tools \
         iputils \
         neovim \
+        tig \
         docker-vim && \
     dnf clean all
 
