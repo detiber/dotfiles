@@ -1,4 +1,4 @@
 # Set Default GOPATH
-if [ -n "$GOPATH" ]; then
+if [ -z "$GOPATH" ]; then
     export GOPATH=~/go
 fi
