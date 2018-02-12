@@ -14,6 +14,7 @@ RUN dnf -y update && \
         neovim \
         tig \
         docker-vim && \
+	tmux && \
     dnf clean all
 
 # Add user
