@@ -13,7 +13,7 @@ RUN dnf -y update && \
         iputils \
         neovim \
         tig \
-        docker-vim && \
+        docker-vim \ 
 	tmux && \
     dnf clean all
 
