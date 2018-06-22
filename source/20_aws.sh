@@ -1,1 +1,1 @@
-export AWS_PROFILE=dev_jason
+export AWS_PROFILE=dev-jason

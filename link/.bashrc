@@ -23,3 +23,6 @@ function src() {
 }
 
 src
+
+# added by travis gem
+[ -f /home/jdetiber/.travis/travis.sh ] && source /home/jdetiber/.travis/travis.sh

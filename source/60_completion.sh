@@ -20,6 +20,8 @@ if ! shopt -oq posix; then
     complete -o default -W "$(cat ~/.ssh/known_hosts | sed 's/[, ].*//' | sort | uniq | grep -v '[0-9]')" ssh scp sftp
   fi
 
-  # Bash completion for CLOUD_SDK
-  [ -f $CLOUD_SDK_DIR/arg_rc ] && source $CLOUD_SDK_DIR/arg_rc
+  # Bash completion for gcloud sdk
+  if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then
+    . "$HOME/google-cloud-sdk/completion.bash.inc"
+  fi
 fi

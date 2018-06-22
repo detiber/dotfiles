@@ -3,6 +3,14 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-if [ -n "$GOPATH" ]; then
+if [ -d "$GOPATH/bin" ]; then
     PATH="$GOPATH/bin:$PATH"
+fi
+
+if [ -d "$HOME/kubebuilder/bin" ]; then
+    PATH="$HOME/kubebuilder/bin:$PATH"
+fi
+
+if [ -f "$HOME/google-cloud-sdk/path.bash.inc" ]; then
+    . "$HOME/google-cloud-sdk/path.bash.inc"
 fi
