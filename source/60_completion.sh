@@ -24,4 +24,7 @@ if ! shopt -oq posix; then
   if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then
     . "$HOME/google-cloud-sdk/completion.bash.inc"
   fi
+
+  # Bash completion for kubectl
+  type -P kubectl > /dev/null && source <(kubectl completion bash)
 fi

@@ -15,3 +15,7 @@ fi
 if [ -f "$HOME/google-cloud-sdk/path.bash.inc" ]; then
     . "$HOME/google-cloud-sdk/path.bash.inc"
 fi
+
+if [ -d "$HOME/.krew/bin" ]; then
+    PATH="$HOME/.krew/bin:$PATH"
+fi
