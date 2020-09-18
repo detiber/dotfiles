@@ -29,4 +29,6 @@ if ! shopt -oq posix; then
   type -P kubectl > /dev/null && source <(kubectl completion bash)
 
   type -P packet > /dev/null && source <(packet completion bash)
+
+  type -P gh > /dev/null && source <(gh completion -s bash)
 fi
