@@ -21,6 +21,7 @@
   #pager = true
 
 [core]
+	excludesfile = /home/detiber/.gitignore_global
   #autocrlf = input
   #whitespace = space-before-tab,trailing-space,tabwidth=4
   #excludesfile = ~/.gitignore
