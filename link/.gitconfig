@@ -1,7 +1,8 @@
 [user]
   name = Jason DeTiberus
   email = detiber@users.noreply.github.com
-  signingkey = CBD7D7A4B41437BC
+  signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrwrFy2MB/VJ32m66fsU+Ov/uslx4pawZCbAho13HQt jdetiber@cisco.com"
+#  signingkey = CBD7D7A4B41437BC
 
 #[url "git@github.com:"]
 #  insteadOf = https://github.com/
@@ -9,8 +10,12 @@
 [commit]
   gpgsign = true
 
+[tag]
+  gpgsign = true
+
 [gpg]
-  program = gpg2
+  format = ssh
+#  program = gpg2
 
 [color]
   ui = auto

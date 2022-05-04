@@ -87,8 +87,6 @@ do_stuff "link" "${HOME}" "${dotfile_base}/link"
 do_stuff "clink" "${HOME}/.config" "${dotfile_base}/clink"
 [ -d "$dotfile_base/$platform/clink" ] && do_stuff "clink" "${HOME}/.config" "$dotfile_base/$platform/clink"
 
-#nvim +PlugInstall! +qall
-
 # Alert if backups were made.
 if [[ "$backup" ]]; then
   echo -e "\nBackups were moved to ~/${backup_dir#$HOME/}"
