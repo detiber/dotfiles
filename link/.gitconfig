@@ -1,7 +1,7 @@
 [user]
   name = Jason DeTiberus
   email = detiber@users.noreply.github.com
-  signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrwrFy2MB/VJ32m66fsU+Ov/uslx4pawZCbAho13HQt jdetiber@cisco.com"
+  signingKey = ~/.ssh/id_ed25519_sk
 #  signingkey = CBD7D7A4B41437BC
 
 #[url "git@github.com:"]

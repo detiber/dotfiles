@@ -1,12 +1,10 @@
 DOTFILES_ROOT="${HOME}/src/dotfiles"
+IS_ZSH='true'
+IS_BASH='false'
 
 function src() {
   local file
   local platform=$(echo $(uname -s) | tr '[:upper:]' '[:lower:]')
-
-  if [[ -e "$HOME/.bash.local" ]]; then
-    source "$HOME/.bash.local"
-  fi
 
   if [[ "$1" ]]; then
     source "${DOTFILES_ROOT}/source/$1.sh"

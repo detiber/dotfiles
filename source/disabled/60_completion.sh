@@ -14,6 +14,9 @@ if ! shopt -oq posix; then
   if [ -f /usr/local/etc/bash_completion ]; then
     . /usr/local/etc/bash_completion
   fi
+  if [ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]; then
+    . /opt/homebrew/etc/profile.d/bash_completion.sh
+  fi
 
   # SSH auto-completion based on entries in known_hosts.
   if [ -f ~/.ssh/known_hosts ]; then
@@ -28,7 +31,6 @@ if ! shopt -oq posix; then
   # Bash completion for kubectl
   type -P kubectl > /dev/null && source <(kubectl completion bash)
 
-  type -P packet > /dev/null && source <(packet completion bash)
-
+  # Bash completion for gh
   type -P gh > /dev/null && source <(gh completion -s bash)
 fi
