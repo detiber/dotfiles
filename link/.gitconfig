@@ -1,8 +1,11 @@
 [user]
   name = Jason DeTiberus
   email = detiber@users.noreply.github.com
+  #signingkey = "key::sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAICorRBFBDnN3B9GGxa7KCCyVQ9cO2L2zdOoA4jJJlZzfAAAABHNzaDo="
   signingKey = ~/.ssh/id_ed25519_sk
-#  signingkey = CBD7D7A4B41437BC
+
+[init]
+  defaultBranch = main
 
 #[url "git@github.com:"]
 #  insteadOf = https://github.com/
@@ -15,83 +18,51 @@
 
 [gpg]
   format = ssh
-#  program = gpg2
+  #program = gpg2
+
+[gpg "ssh"]
+  program = ssh-keygen
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-gpgsshdefaultKeyCommand
+  # defaultKeyCommand =
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-gpgsshallowedSignersFile
+  # allowedSignersFile = 
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-gpgsshrevocationFile
+  # revocationFilea =
 
 [color]
   ui = auto
-  #interactive = auto
-  #diff = auto
-  #status = auto
-  #branch = auto
-  #pager = true
 
 [core]
-	excludesfile = /home/detiber/.gitignore_global
-  #autocrlf = input
-  #whitespace = space-before-tab,trailing-space,tabwidth=4
+  excludesfile = ~/.gitignore_global
   #excludesfile = ~/.gitignore
-  #preloadindex = true
+  autocrlf = input
+  safecrlf = true
+  #sshCommand = ssh
+  #askPass = <something>
 
 [credential]
   #helper = cache --timeout=3600
-
-[apply]
-  #whitespace = fix
 
 [alias]
   pr = !"pr() { git fetch upstream pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
   dmu = !"dmu() { git branch --merged remotes/upstream/master | grep -v master | grep -v '\\*' | xargs -t -n 1 -- git branch -d; }; dmu"
   rdmo = !"rdmo() { git branch -a --merged remotes/origin/master | grep -v master | grep remotes/origin/ | cut -d / -f 3 | xargs -t -n 1 -- git push --delete origin; }; rdmo"
 
-  #br = branch
-  #ci = commit
-  #co = checkout
-  #df = diff
-  #g = grep -I
-  #lg = log -p
-  #pp = !"echo 'Pull'; git pull; echo 'Push'; git push"
-  #rb = rbranch
-  #rv = review
-  #st = status
-  #fa = fetch --all --prune
-  #furb = "!echo \"Fetch upstream\"; git fetch upstream; echo \"Rebase\"; git rebase upstream/master"
-  #delete-merged-into-upstream = !"git branch --merged remotes/upstream/master | grep -v master | grep -v \"\\*\" | xargs -t -n 1 git branch -d"
-  #remote-delete-merged-origin = !"git branch -a --merged remotes/origin/master | grep -v master | grep remotes/origin/ | cut -d / -f 3 | xargs -t -n 1 git push --delete origin"
-  #superclean = clean -fdx -e '*.sublime-*' -e '.gcloud'
-  #amend = commit -n --amend --no-edit
-
-[push]
-  #default = current
-
-[color "branch"]
-  #current = yellow reverse
-  #local = yellow
-  #remote = green
-[color "diff"]
-  #meta = yellow bold
-  #frag = magenta bold
-  #old = red bold
-  #new = green bold
-[color "status"]
-  #added = yellow
-  #changed = green
-  #untracked = cyan
-
-[merge]
-  #log = true
-
-[rerere]
-  #enabled = 1
-
-[rebase]
-  #autosquash = true
-
-[include]
-  #path = ~/.gitconfig.platform
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-[init]
-	defaultBranch = main
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://wwwin-github.cisco.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://sqbu-github.cisco.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

@@ -75,6 +75,16 @@ function clink_do() {
   ln -sf ${2/$HOME/..} ~/.config/
 }
 
+# Link LaunchAgent files
+function LaunchAgents_header() { e_header "Linking files into ~/Library/LaunchAgents directory"; }
+function LaunchAgents_test() {
+  link_test "$1" "$2"
+}
+function LaunchAgents_do() {
+  e_success "Linking ~/Library/LaunchAgents/$1."
+  ln -Lf ${2/$HOME/..\/..} ~/Library/LaunchAgents/
+}
+
 # Tweak file globbing.
 shopt -s dotglob
 shopt -s nullglob
@@ -86,6 +96,8 @@ do_stuff "link" "${HOME}" "${dotfile_base}/link"
 
 do_stuff "clink" "${HOME}/.config" "${dotfile_base}/clink"
 [ -d "$dotfile_base/$platform/clink" ] && do_stuff "clink" "${HOME}/.config" "$dotfile_base/$platform/clink"
+
+[ -d "$dotfile_base/$platform/LaunchAgents" ] && do_stuff "LaunchAgents" "${HOME}/Library/LaunchAgents" "$dotfile_base/$platform/LaunchAgents"
 
 # Alert if backups were made.
 if [[ "$backup" ]]; then
